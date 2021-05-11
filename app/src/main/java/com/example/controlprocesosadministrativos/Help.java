@@ -1,6 +1,8 @@
 package com.example.controlprocesosadministrativos;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +12,8 @@ import java.io.InputStreamReader;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class Help  {
 
@@ -44,5 +48,6 @@ public class Help  {
             return "";
         }
     }
+
 
 }

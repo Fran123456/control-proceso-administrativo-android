@@ -40,17 +40,17 @@
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPersonName|textPassword"
+        android:text="paginaazul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usuario_txt"
-        tools:text="paginaazul" />
+        app:layout_constraintTop_toBottomOf="@+id/usuario_txt" />
 
     <Button
         android:id="@+id/entrar_btn"
         android:layout_width="345dp"
         android:layout_height="54dp"
         android:layout_marginTop="32dp"
-        android:background="#3F51B5"
+        android:background="#4052B3"
         android:onClick="login"
         android:text="@string/entrar"
         android:textColor="#FFFFFF"

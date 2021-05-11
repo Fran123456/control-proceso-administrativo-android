@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         DB = new DataBaseHelper(this);
 
         String login=  Help.readFile(this, "login.txt");
-        if(login != "0" || login != "" || login != null){
+        if(!login.equals("0")){
             Intent inte = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(inte);
         }

@@ -2,9 +2,14 @@ package com.example.controlprocesosadministrativos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     User user;
@@ -25,4 +30,22 @@ public class HomeActivity extends AppCompatActivity {
        welcome.setText(user.nombre);
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id==R.id.menu_salir_menu){
+            Help.saveFile("login.txt", "0", this);
+            startActivity(new Intent(this , MainActivity.class));
+            finish();
+           // Toast.makeText(this, "xxx", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
