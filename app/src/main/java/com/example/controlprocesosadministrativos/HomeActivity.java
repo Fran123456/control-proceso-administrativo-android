@@ -14,6 +14,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setTitle("Home");
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         String login=  Help.readFile(this, "login.txt");
         DB = new DataBaseHelper(this);
         user =  DB.userByid(login);
