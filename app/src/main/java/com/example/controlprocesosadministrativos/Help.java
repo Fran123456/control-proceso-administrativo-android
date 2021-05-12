@@ -9,9 +9,14 @@ import java.io.FileOutputStream;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.controlprocesosadministrativos.Utility.Menu;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
@@ -48,6 +53,24 @@ public class Help  {
             return "";
         }
     }
+
+    public static List<Menu> getMenusHome(){
+        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","administra carreras (Crear, modificar, eliminar)", R.drawable.carrera,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURA","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
+        return item;
+    }
+
+    public static List<Menu> getMenusCareer(){
+        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una carrera", R.drawable.agregar,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("MODIFICAR","Modificar una carrera existente", R.drawable.editar,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ELIMINAR","Eliminar una carrera existente", R.drawable.eliminar,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("VER TODAS LAS CARRERAS","Listar todas las carreras existentes", R.drawable.lista,"CareerActivities.CareerMenuActivity"));
+        return item;
+    }
+
 
 
 }

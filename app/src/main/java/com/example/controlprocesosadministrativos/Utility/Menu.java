@@ -5,13 +5,14 @@ public class Menu {
     public Menu() {
     }
 
-    public Menu(String title, String description, int image) {
+    public Menu(String title, String description, int image, String url) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.url = url;
     }
 
-    private String title, description;
+    private String title, description, url;
     private int image;
 
     public String getTitle() {
@@ -36,5 +37,13 @@ public class Menu {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -28,33 +28,40 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setTitle("Home");
+        setTitle("Home"); //asignamos el titulo a la navbar
+        menuList = Help.getMenusHome(); //obtenemos el menu
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String login=  Help.readFile(this, "login.txt");
         DB = new DataBaseHelper(this);
         user =  DB.userByid(login);
 
         welcome= (TextView) findViewById(R.id.bienvenido_text);
-        welcome.setText(user.nombre);
+        welcome.setText("Bienvenido: "+ user.nombre);
 
        recyclerView = (RecyclerView)findViewById(R.id.recycleMenu);
        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-       adapter= new RecyclerViewAdaptador(getMenus());
+       adapter= new RecyclerViewAdaptador(menuList);
        recyclerView.setAdapter(adapter);
+
        adapter.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v) {
-               Toast.makeText(getApplicationContext(),getMenus().get(recyclerView.getChildAdapterPosition(v)).getTitle(), Toast.LENGTH_LONG ).show();
+               //vamos a pasar a otra activity
+
+               try{
+                   Class<?>
+                           clase=Class.forName("com.example.controlprocesosadministrativos."+menuList.get(recyclerView.getChildAdapterPosition(v)).getUrl());
+                   Intent inte = new Intent(getApplicationContext(), clase);
+                   inte.putExtra("titulo",  "Hola" );
+                   startActivity(inte);
+               }catch(ClassNotFoundException e){
+                   e.printStackTrace();
+               }
+
+               //Toast.makeText(getApplicationContext(),getMenus().get(recyclerView.getChildAdapterPosition(v)).getTitle(), Toast.LENGTH_LONG ).show();
            }
        });
 
-    }
-
-    public List<com.example.controlprocesosadministrativos.Utility.Menu> getMenus(){
-        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("Home","descripcion", R.drawable.subject));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("Home2","descripcion2", R.drawable.subject));
-        return item;
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
