@@ -6,19 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
+
+import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Tables.Tables;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "CONTROL_PROCESO_ADMINISTRATIVO";
     private Tables tables;
-
-    private static final String COL_1 = "ID";
-    private static final String COL_2 = "USERNAME";
-    private static final String COL_3 = "EMAIL";
-    private static final String COL_4 = "PASSWORD";
-
-
 
     public DataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME , null, 1);
@@ -29,15 +24,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.userTable + "("+tables.userFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
                 " "+tables.userFields[1]+" TEXT ," +
                 ""+tables.userFields[2]+" TEXT , "+tables.userFields[3]+" TEXT )");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.careerTable + "("+tables.careerFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                " "+tables.careerFields[1]+" TEXT ," +
+                ""+tables.careerFields[2]+" TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(" DROP TABLE IF EXISTS " + tables.userTable);
+        db.execSQL(" DROP TABLE IF EXISTS " + tables.careerTable);
         onCreate(db);
     }
 
-
+  //METODOS PARA USUARIO//
     public boolean registerUser(String username , String email , String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -114,4 +114,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return user;
     }
+
+     //METODOS PARA USUARIO//
+
+
+     //METODOS PARA CARRERA
+     public String addCareer(Career career){
+
+         SQLiteDatabase db = this.getWritableDatabase();
+         String message="";
+         long contador=0;
+         ContentValues careerValues = new ContentValues();
+         careerValues.put(tables.careerFields[1], career.getCodeCareer() );
+         careerValues.put(tables.careerFields[2], career.getCareer()  );
+         contador=db.insert(tables.careerTable, null, careerValues);
+
+         if(contador==-1 || contador==0)
+         {
+             message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+         }
+         else {
+             message="Carrera agregada correctamente";
+         }
+         db.close();
+         return message;
+     }
+
+    //METODOS PARA CARRERA
 }

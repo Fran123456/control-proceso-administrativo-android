@@ -7,4 +7,9 @@
     <string name="paginaazul">paginaazul</string>
     <string name="salir">Salir</string>
     <string name="control_de_procesos_administrativos">CONTROL DE PROCESOS ADMINISTRATIVOS</string>
+    <string name="agregar">Agregar</string>
+    <string name="codigo_de_la_carrera">Codigo de la carrera</string>
+    <string name="limpiar">Limpiar</string>
+
+    <string name="nombre_de_la_carrera">Nombre de la carrera</string>
 </resources>
