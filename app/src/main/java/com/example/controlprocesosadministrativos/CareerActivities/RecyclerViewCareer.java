@@ -32,6 +32,7 @@ public class RecyclerViewCareer extends RecyclerView.Adapter<RecyclerViewCareer.
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
         private Button deletebtn;
+        private Button editbtn;
         ImageView image;
 
         public ViewHolder( View itemView) {
@@ -39,6 +40,7 @@ public class RecyclerViewCareer extends RecyclerView.Adapter<RecyclerViewCareer.
             title = (TextView)itemView.findViewById(R.id.careerTxt_text);
             deletebtn = (Button)itemView.findViewById(R.id.deleteCareer_btn) ;
             image=(ImageView)itemView.findViewById(R.id.imgItemCareer_img);
+            editbtn=(Button)itemView.findViewById(R.id.editCareer_btn);
         }
     }
 
@@ -79,6 +81,21 @@ public class RecyclerViewCareer extends RecyclerView.Adapter<RecyclerViewCareer.
                 }catch(ClassNotFoundException e){
                     e.printStackTrace();
                 }*/
+            }
+        });
+
+
+        holder.editbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    Class<?> clase=Class.forName("com.example.controlprocesosadministrativos.CareerActivities.CareerDeleteActivity");
+                    Intent inte = new Intent(view.getContext(), clase);
+                    inte.putExtra("id",  menuList.get(position).getId()  );
+                    view.getContext().startActivity(inte);
+                }catch(ClassNotFoundException e){
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -3,7 +3,6 @@
     <string name="usuario">usuario</string>
     <string name="contrase_a">contraseña</string>
     <string name="entrar">ENTRAR</string>
-    <string name="todo">TODO</string>
     <string name="paginaazul">paginaazul</string>
     <string name="salir">Salir</string>
     <string name="control_de_procesos_administrativos">CONTROL DE PROCESOS ADMINISTRATIVOS</string>
@@ -13,4 +12,6 @@
 
     <string name="nombre_de_la_carrera">Nombre de la carrera</string>
     <string name="eliminar">Eliminar</string>
+    <string name="todo">TODO</string>
+    <string name="editar">EDITAR</string>
 </resources>
