@@ -89,9 +89,9 @@ public class RecyclerViewCareer extends RecyclerView.Adapter<RecyclerViewCareer.
             @Override
             public void onClick(View view) {
                 try{
-                    Class<?> clase=Class.forName("com.example.controlprocesosadministrativos.CareerActivities.CareerDeleteActivity");
+                    Class<?> clase=Class.forName("com.example.controlprocesosadministrativos.CareerActivities.CareerEditActivity");
                     Intent inte = new Intent(view.getContext(), clase);
-                    inte.putExtra("id",  menuList.get(position).getId()  );
+                    inte.putExtra("id", String.valueOf( menuList.get(position).getId() ) );
                     view.getContext().startActivity(inte);
                 }catch(ClassNotFoundException e){
                     e.printStackTrace();

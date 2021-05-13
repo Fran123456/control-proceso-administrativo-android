@@ -1,14 +1,14 @@
 package com.example.controlprocesosadministrativos.CareerActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
@@ -16,37 +16,39 @@ import com.example.controlprocesosadministrativos.Help;
 import com.example.controlprocesosadministrativos.MainActivity;
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.R;
-import com.example.controlprocesosadministrativos.RecyclerViewAdaptador;
-import com.example.controlprocesosadministrativos.Utility.Menu;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CareerListActivity extends AppCompatActivity {
-
+public class CareerEditActivity extends AppCompatActivity {
     private DataBaseHelper DB;
-    private List<Career> careersList;
-    private RecyclerView recyclerView;
-    private RecyclerViewCareer adapter;
+    private Career career;
+    private EditText editCareer;
+    private EditText editCodeCareer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_career_list);
-
-        setTitle("Listar carreras");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_career_edit);
         DB = new DataBaseHelper(this);
-        careersList = new ArrayList<Career>();
-        careersList= DB.getCareers();
+        career = new Career();
+        String id = getIntent().getStringExtra("id");
+        career = DB.getCareer(id);
+        setTitle("Editar "+career.getCareer());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerCareer);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-         adapter= new RecyclerViewCareer(careersList);
-        recyclerView.setAdapter(adapter);
+        editCareer = (EditText)findViewById(R.id.editCareer_txt);
+        editCodeCareer=(EditText)findViewById(R.id.editCodeCareer_txt);
+
+        editCodeCareer.setText( career.getCodeCareer() );
+        editCareer.setText( career.getCareer() );
 
     }
 
+    public void editCareer(View v){
+        career.setCareer( editCareer.getText().toString() );
+        career.setCodeCareer(editCodeCareer.getText().toString());
+        String message = DB.editCareer(career);
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 
     public boolean onCreateOptionsMenu(android.view.Menu menu){
         getMenuInflater().inflate(R.menu.overflow, menu);
@@ -63,4 +65,8 @@ public class CareerListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 }

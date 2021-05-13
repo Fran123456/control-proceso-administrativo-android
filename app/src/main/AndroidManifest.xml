@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
-        <activity android:name=".CareerActivities.CareerDeleteActivity"></activity>
-        <activity android:name=".CareerActivities.CareerListActivity" android:parentActivityName=".CareerActivities.CareerMenuActivity" />
+        <activity android:name=".CareerActivities.CareerSearchActivity"
+            android:parentActivityName=".CareerActivities.CareerMenuActivity"/>
+        <activity
+            android:name=".CareerActivities.CareerEditActivity"
+            android:parentActivityName=".CareerActivities.CareerListActivity" />
+        <activity
+            android:name=".CareerActivities.CareerListActivity"
+            android:parentActivityName=".CareerActivities.CareerMenuActivity" />
         <activity
             android:name=".CareerActivities.CareerAddActivity"
             android:parentActivityName=".CareerActivities.CareerMenuActivity" />

@@ -65,8 +65,8 @@ public class Help  {
     public static List<Menu> getMenusCareer(){
         List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una carrera", R.drawable.agregar,"CareerActivities.CareerAddActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("MODIFICAR","Modificar una carrera existente", R.drawable.editar,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ELIMINAR","Eliminar una carrera existente", R.drawable.eliminar,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una carrera existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
+       // item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ELIMINAR","Eliminar una carrera existente", R.drawable.eliminar,"CareerActivities.CareerMenuActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("VER TODAS LAS CARRERAS","Listar todas las carreras existentes", R.drawable.lista,"CareerActivities.CareerListActivity"));
         return item;
     }

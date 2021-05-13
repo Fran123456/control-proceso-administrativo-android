@@ -154,6 +154,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
              career.setCareer(cursor.getString(2));
              careers.add(career);
          }
+         db.close();
          return careers;
      }
 
@@ -165,8 +166,57 @@ public class DataBaseHelper extends SQLiteOpenHelper {
          //     contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
          // }
          contador+=db.delete(tables.careerTable, tables.careerFields[0]+"='"+id+"'", null);
+         db.close();
          return regAfectados;
      }
+
+    public Career getCareer(String ids){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] id = {ids};
+        Cursor cursor = db.query(tables.careerTable, tables.careerFields, tables.careerFields[0]+" = ?",
+                id, null, null, null);
+
+        if(cursor.moveToFirst()){
+            Career career = new Career();
+            career.setId(cursor.getInt(0));
+            career.setCodeCareer(cursor.getString(1));
+            career.setCareer(cursor.getString(2));
+            db.close();
+            return career;
+        }else{
+            db.close();
+            return null;
+        }
+    }
+
+    public Career getCareerByCode(String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] codeCareer = {code};
+        Cursor cursor = db.query(tables.careerTable, tables.careerFields, tables.careerFields[1]+" = ?",
+                codeCareer , null, null, null);
+        Career career = new Career();
+        if(cursor.moveToFirst()){
+            career.setId(cursor.getInt(0));
+            career.setCodeCareer(cursor.getString(1));
+            career.setCareer(cursor.getString(2));
+            db.close();
+            return career;
+        }else{
+            db.close();
+            return career;
+        }
+    }
+
+    public String editCareer (Career career){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] id = { String.valueOf(career.getId()) };
+        ContentValues cv = new ContentValues();
+        cv.put(tables.careerFields[1], career.getCodeCareer());
+        cv.put(tables.careerFields[2], career.getCareer());
+        db.update(tables.careerTable, cv, tables.careerFields[0]+" = ?", id);
+        return "Registro Actualizado Correctamente";
+
+    }
 
     //METODOS PARA CARRERA
 }
