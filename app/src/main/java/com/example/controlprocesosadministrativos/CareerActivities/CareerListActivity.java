@@ -1,19 +1,34 @@
 package com.example.controlprocesosadministrativos.CareerActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
 import com.example.controlprocesosadministrativos.Help;
 import com.example.controlprocesosadministrativos.MainActivity;
+import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.R;
+import com.example.controlprocesosadministrativos.RecyclerViewAdaptador;
+import com.example.controlprocesosadministrativos.Utility.Menu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CareerListActivity extends AppCompatActivity {
 
     private DataBaseHelper DB;
+    private List<Career> careersList;
+    private RecyclerView recyclerView;
+    private RecyclerViewCareer adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +37,14 @@ public class CareerListActivity extends AppCompatActivity {
         setTitle("Listar carreras");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         DB = new DataBaseHelper(this);
+        careersList = new ArrayList<Career>();
+        careersList= DB.getCareers();
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerCareer);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+         adapter= new RecyclerViewCareer(careersList);
+        recyclerView.setAdapter(adapter);
+
     }
 
 

@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Tables.Tables;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "CONTROL_PROCESO_ADMINISTRATIVO";
@@ -114,13 +117,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return user;
     }
-
-     //METODOS PARA USUARIO//
+    //METODOS PARA USUARIO//
 
 
      //METODOS PARA CARRERA
      public String addCareer(Career career){
-
          SQLiteDatabase db = this.getWritableDatabase();
          String message="";
          long contador=0;
@@ -138,6 +139,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
          }
          db.close();
          return message;
+     }
+
+     public List<Career> getCareers(){
+         SQLiteDatabase db = this.getWritableDatabase();
+         List<Career> careers= new ArrayList<Career>();
+         Career career;
+         Cursor cursor = db.query(tables.careerTable, tables.careerFields, null, null, null , null, null);
+
+         while(cursor.moveToNext()){
+             career  = new Career();
+             career.setId(cursor.getInt(0));
+             career.setCodeCareer(cursor.getString(1));
+             career.setCareer(cursor.getString(2));
+             careers.add(career);
+         }
+         return careers;
+     }
+
+     public String deleteCareer(int id){
+         SQLiteDatabase db = this.getWritableDatabase();
+         String regAfectados="Carrera eliminada correctamente";
+         int contador=0;
+         //  if (verificarIntegridad(alumno,3)) {
+         //     contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+         // }
+         contador+=db.delete(tables.careerTable, tables.careerFields[0]+"='"+id+"'", null);
+         return regAfectados;
      }
 
     //METODOS PARA CARRERA
