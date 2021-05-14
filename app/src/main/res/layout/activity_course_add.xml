@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/asignatura" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/addCodeCourse_txt"
         android:layout_width="342dp"
         android:layout_height="44dp"
         android:layout_marginTop="36dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/addCourse_txt"
         android:layout_width="342dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
@@ -40,16 +40,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/addCodeCourse_txt" />
 
     <Spinner
         android:id="@+id/spinnerCareers_combo"
-        android:layout_width="340dp"
-        android:layout_height="29dp"
+        android:layout_width="341dp"
+        android:layout_height="41dp"
+        android:background="#E6E5E5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintTop_toBottomOf="@+id/addCourse_txt"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <Button
+        android:id="@+id/addCourse_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="AddCourseView"
+        android:text="@string/agregar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCareers_combo"
+        app:layout_constraintVertical_bias="0.144" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setTitle("Home"); //asignamos el titulo a la navbar
         menuList = Help.getMenusHome(); //obtenemos el menu
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String login=  Help.readFile(this, "login.txt");
         DB = new DataBaseHelper(this);
         user =  DB.userByid(login);

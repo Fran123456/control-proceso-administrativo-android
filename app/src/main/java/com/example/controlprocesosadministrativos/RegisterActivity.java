@@ -34,11 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
            boolean var = DB.registerUser(user.getText().toString() , email.getText().toString() , password.getText().toString());
            if(var){
 
-              User u = DB.userByUsernameAndPassword(user.getText().toString(),  password.getText().toString());
+                User u = DB.userByUsernameAndPassword(user.getText().toString(),  password.getText().toString());
                 Integer id = u.getId();
-               Help.saveFile("login.txt", id.toString() , this);
-              // Toast.makeText(RegisterActivity.this, "User Registered Successfully !!", Toast.LENGTH_SHORT).show();
-               this.login(v);
+                Help.saveFile("login.txt", id.toString() , this);
+               // Toast.makeText(RegisterActivity.this, u.getId(), Toast.LENGTH_SHORT).show();
+                this.login(v);
            }
            else{
                Toast.makeText(RegisterActivity.this, "El registro ha fallado, intente de nuevo", Toast.LENGTH_SHORT).show();
@@ -49,7 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
     public void login(View v){
         boolean var = DB.checkUser(user.getText().toString() , password.getText().toString());
         if (var){
-            Help.saveFile("login.txt", "1", this);
+            User u = DB.userByUsernameAndPassword(user.getText().toString(),  password.getText().toString());
+            Integer id = u.getId();
+            Help.saveFile("login.txt", id.toString() , this);
             Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this , HomeActivity.class));
             finish();

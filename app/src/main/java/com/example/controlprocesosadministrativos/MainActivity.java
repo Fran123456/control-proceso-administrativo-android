@@ -21,10 +21,15 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password_txt);
         DB = new DataBaseHelper(this);
 
-        String login=  Help.readFile(this, "login.txt");
-        if(!login.equals("0")){
-            Intent inte = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(inte);
+
+        try{
+            String login=  Help.readFile(this, "login.txt");
+            if(!login.equals("0")){
+                Intent inte = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(inte);
+            }
+        }catch (Exception e){
+            Help.saveFile("login.txt", "0", this);
         }
     }
 

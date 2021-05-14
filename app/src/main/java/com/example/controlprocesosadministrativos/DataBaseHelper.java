@@ -20,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Tables tables;
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME , null, 2);
     }
 
     @Override
@@ -33,10 +33,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " "+tables.careerFields[1]+" TEXT ," +
                 ""+tables.careerFields[2]+" TEXT)");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.courseTable+ "("+tables.careerFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                " "+tables.careerFields[1]+" TEXT ," +
-                ""+tables.careerFields[2]+" TEXT)" +
-                ""+tables.careerFields[3]+" INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.courseTable+ "("+tables.courseFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                " "+tables.courseFields[1]+" TEXT ," +
+                ""+tables.courseFields[2]+" TEXT," +
+                ""+tables.courseFields[3]+" INTEGER)");
     }
 
     @Override
@@ -96,8 +96,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
 
             user.setId( Integer.parseInt(cursor.getString(0))   );
-            user.setNombre(cursor.getString(1));
-            user.setUsuario(cursor.getString(2));
+
             db.close();
         }else{
             db.close();
@@ -232,10 +231,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String message="";
         long contador=0;
         ContentValues courseValues = new ContentValues();
-        courseValues.put(tables.careerFields[1], course.getCodeCourse() );
-        courseValues.put(tables.careerFields[2], course.getCourse()  );
-        courseValues.put(tables.careerFields[3], course.getCarrerId() ) ;
-        contador=db.insert(tables.careerTable, null, courseValues);
+        courseValues.put(tables.courseFields[1], course.getCodeCourse() );
+        courseValues.put(tables.courseFields[2], course.getCourse()  );
+        courseValues.put(tables.courseFields[3], course.getCarrerId() ) ;
+        contador=db.insert(tables.courseTable, null, courseValues);
 
         if(contador==-1 || contador==0)
         {
