@@ -6,18 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
 import com.example.controlprocesosadministrativos.Help;
 import com.example.controlprocesosadministrativos.MainActivity;
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.R;
-import com.example.controlprocesosadministrativos.RecyclerViewAdaptador;
-import com.example.controlprocesosadministrativos.Utility.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +35,7 @@ public class CareerListActivity extends AppCompatActivity {
         careersList = new ArrayList<Career>();
         careersList= DB.getCareers();
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerCareer);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerCourse);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
          adapter= new RecyclerViewCareer(careersList);
         recyclerView.setAdapter(adapter);

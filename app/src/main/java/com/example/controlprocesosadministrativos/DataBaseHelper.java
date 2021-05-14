@@ -178,12 +178,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Career getCareer(String ids){
         SQLiteDatabase db = this.getWritableDatabase();
+        Career career = new Career();
+
         String[] id = {ids};
         Cursor cursor = db.query(tables.careerTable, tables.careerFields, tables.careerFields[0]+" = ?",
                 id, null, null, null);
 
         if(cursor.moveToFirst()){
-            Career career = new Career();
+
             career.setId(cursor.getInt(0));
             career.setCodeCareer(cursor.getString(1));
             career.setCareer(cursor.getString(2));
@@ -191,7 +193,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return career;
         }else{
             db.close();
-            return null;
+            return career;
         }
     }
 
@@ -245,6 +247,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return message;
+    }
+
+
+    public List<Course> getCourses(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Course> courses= new ArrayList<Course>();
+        Course course;
+        Cursor cursor = db.query(tables.courseTable, tables.courseFields, null, null, null , null, null);
+
+        while(cursor.moveToNext()){
+            course  = new Course();
+            course.setId(cursor.getInt(0));
+            course. setCodeCourse(cursor.getString(1));
+            course.setCourse(cursor.getString(2));
+            course.setCarrerId(cursor.getInt(3));
+           courses.add(course);
+        }
+        db.close();
+        return courses;
     }
     //METODOS PARA ASIGNATURA
 }

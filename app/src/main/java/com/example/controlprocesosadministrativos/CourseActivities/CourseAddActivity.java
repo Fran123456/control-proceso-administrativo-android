@@ -2,7 +2,9 @@ package com.example.controlprocesosadministrativos.CourseActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
+import com.example.controlprocesosadministrativos.Help;
+import com.example.controlprocesosadministrativos.MainActivity;
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.R;
@@ -89,5 +93,22 @@ public class CourseAddActivity extends AppCompatActivity {
         for (int i =0; i<careersList.size(); i++){
             careersString.add( "("+careersList.get(i).getCodeCareer() + ") " + careersList.get(i).getCareer() );
         }
+    }
+
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu){
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id==R.id.menu_salir_menu){
+            Help.saveFile("login.txt", "0", this);
+            startActivity(new Intent(this , MainActivity.class));
+            finish();
+            // Toast.makeText(this, "xxx", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

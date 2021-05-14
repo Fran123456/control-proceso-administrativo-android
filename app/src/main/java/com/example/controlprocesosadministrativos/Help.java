@@ -77,7 +77,7 @@ public class Help  {
         List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una asignatura", R.drawable.agregar,"CourseActivities.CourseAddActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una asignatura existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","Administrar asignaturas", R.drawable.lista,"CareerActivities.CareerListActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","Administrar asignaturas", R.drawable.lista,"CourseActivities.CourseListActivity"));
         return item;
     }
 
