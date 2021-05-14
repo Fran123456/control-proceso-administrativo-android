@@ -57,7 +57,7 @@ public class Help  {
     public static List<Menu> getMenusHome(){
         List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","administra carreras (Crear, modificar, eliminar)", R.drawable.carrera,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURA","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CourseActivities.CourseMenuActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
         return item;
     }
@@ -67,7 +67,17 @@ public class Help  {
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una carrera", R.drawable.agregar,"CareerActivities.CareerAddActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una carrera existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
        // item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ELIMINAR","Eliminar una carrera existente", R.drawable.eliminar,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("VER TODAS LAS CARRERAS","Listar todas las carreras existentes", R.drawable.lista,"CareerActivities.CareerListActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","Administrar carreras", R.drawable.lista,"CareerActivities.CareerListActivity"));
+        return item;
+    }
+
+
+
+    public static List<Menu> getMenusCourse(){
+        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una asignatura", R.drawable.agregar,"CourseActivities.CourseAddActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una asignatura existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","Administrar asignaturas", R.drawable.lista,"CareerActivities.CareerListActivity"));
         return item;
     }
 

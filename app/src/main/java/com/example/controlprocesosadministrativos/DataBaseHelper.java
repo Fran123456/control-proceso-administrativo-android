@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.controlprocesosadministrativos.Models.Career;
+import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.Tables.Tables;
 
 import java.util.ArrayList;
@@ -31,12 +32,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.careerTable + "("+tables.careerFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
                 " "+tables.careerFields[1]+" TEXT ," +
                 ""+tables.careerFields[2]+" TEXT)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.courseTable+ "("+tables.careerFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                " "+tables.careerFields[1]+" TEXT ," +
+                ""+tables.careerFields[2]+" TEXT)" +
+                ""+tables.careerFields[3]+" INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(" DROP TABLE IF EXISTS " + tables.userTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.careerTable);
+        db.execSQL(" DROP TABLE IF EXISTS " + tables.courseTable);
         onCreate(db);
     }
 
@@ -215,8 +222,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(tables.careerFields[2], career.getCareer());
         db.update(tables.careerTable, cv, tables.careerFields[0]+" = ?", id);
         return "Registro Actualizado Correctamente";
-
     }
-
     //METODOS PARA CARRERA
+
+
+    //METODOS PARA ASIGNATURA
+    public String addCourse(Course course){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String message="";
+        long contador=0;
+        ContentValues courseValues = new ContentValues();
+        courseValues.put(tables.careerFields[1], course.getCodeCourse() );
+        courseValues.put(tables.careerFields[2], course.getCourse()  );
+        courseValues.put(tables.careerFields[3], course.getCarrerId() ) ;
+        contador=db.insert(tables.careerTable, null, courseValues);
+
+        if(contador==-1 || contador==0)
+        {
+            message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            message="Asignatura agregada correctamente";
+        }
+        db.close();
+        return message;
+    }
+    //METODOS PARA ASIGNATURA
 }

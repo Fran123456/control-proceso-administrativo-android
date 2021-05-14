@@ -6,4 +6,7 @@ public class Tables {
 
     public static String careerTable ="career";
     public static  String[] careerFields = new String []{"id","code_career","career"};
+
+    public static String courseTable ="course";
+    public static  String[] courseFields = new String []{"id","code_course","course","career_id"};
 }
