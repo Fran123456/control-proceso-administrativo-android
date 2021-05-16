@@ -47,15 +47,19 @@ public class HomeActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                //vamos a pasar a otra activity
-
-               try{
-                   Class<?>
-                           clase=Class.forName("com.example.controlprocesosadministrativos."+menuList.get(recyclerView.getChildAdapterPosition(v)).getUrl());
-                   Intent inte = new Intent(getApplicationContext(), clase);
-                   inte.putExtra("titulo",  "Hola" );
-                   startActivity(inte);
-               }catch(ClassNotFoundException e){
-                   e.printStackTrace();
+               if(menuList.get(recyclerView.getChildAdapterPosition(v)).getUrl().equals("db") ){
+                    String message = DB.dbInsertData();
+                   Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG ).show();
+               }else{
+                   try{
+                       Class<?>
+                               clase=Class.forName("com.example.controlprocesosadministrativos."+menuList.get(recyclerView.getChildAdapterPosition(v)).getUrl());
+                       Intent inte = new Intent(getApplicationContext(), clase);
+                       inte.putExtra("titulo",  "Hola" );
+                       startActivity(inte);
+                   }catch(ClassNotFoundException e){
+                       e.printStackTrace();
+                   }
                }
 
                //Toast.makeText(getApplicationContext(),getMenus().get(recyclerView.getChildAdapterPosition(v)).getTitle(), Toast.LENGTH_LONG ).show();

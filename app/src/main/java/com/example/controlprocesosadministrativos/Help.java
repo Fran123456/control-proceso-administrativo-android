@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.controlprocesosadministrativos.Models.Career;
+import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.Utility.Menu;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -59,6 +61,7 @@ public class Help  {
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","administra carreras (Crear, modificar, eliminar)", R.drawable.carrera,"CareerActivities.CareerMenuActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CourseActivities.CourseMenuActivity"));
         item.add(new com.example.controlprocesosadministrativos.Utility.Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
+        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("LLENAR DB","Llena con datos inicial la DB", R.drawable.db,"db"));
         return item;
     }
 
@@ -82,5 +85,36 @@ public class Help  {
     }
 
 
+
+    public static List<Career> carreersDB(){
+        List<Career> careerList= new ArrayList<>();
+        //CARRERAS
+        String[] careerNames={"Ingenieria en sistemas informaticos","Ingenieria en Alimentos","Ingenieria industrial",
+                "Ingenieria Electrica","Ingenieria Mecanica"};
+        String[] code={"IEI","IEA","IID", "IEL","IMC"};
+        for (int i = 0; i <code.length ; i++) {
+            Career career = new Career();
+            career.setCodeCareer( code[i] );
+            career.setCareer( careerNames[i]);
+            careerList.add(career);
+        }
+        return careerList;
+    }
+
+    public static List<Course> courseDB(){
+        List<Course> courseList = new ArrayList<>();
+        //courses
+        String[] courseNames={"Programación para dispositivos moviles","Herramientas de productividad","Sistema de información gerencial",
+                "Recursos Humanos"};
+        String[] code={"PDM115","HDP115","SIG115", "RHU115"};
+        for (int i = 0; i <code.length ; i++) {
+            Course course = new Course();
+            course.setCourse( courseNames[i] );
+            course.setCodeCourse( code[i]);
+            course.setCarrerId( 1 );
+            courseList.add(course);
+        }
+        return courseList;
+    }
 
 }

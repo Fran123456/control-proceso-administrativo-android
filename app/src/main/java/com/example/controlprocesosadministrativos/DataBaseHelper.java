@@ -41,7 +41,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(" DROP TABLE IF EXISTS " + tables.userTable);
+       // db.execSQL(" DROP TABLE IF EXISTS " + tables.userTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.careerTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.courseTable);
         onCreate(db);
@@ -354,8 +354,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return course;
         }
     }
-
-
-
     //METODOS PARA ASIGNATURA
+
+    public String dbInsertData(){
+        int controller = 0;
+        String Message = "Datos ingresados correctamente";
+        SQLiteDatabase db = this.getWritableDatabase();
+        int v = db.getVersion();
+        this.onUpgrade(db,v, v++ );
+        if(controller ==0){
+            List<Career> careers = new ArrayList<>();
+            careers = Help.carreersDB();
+
+            List<Course> courses = new ArrayList<>();
+            courses = Help.courseDB();
+
+            for (int i = 0; i <careers.size() ; i++) {
+                Career c = new Career();
+                c = careers.get(i);
+                this.addCareer(c);
+            }
+
+            for (int i = 0; i <courses.size() ; i++) {
+                Course c = new Course();
+                c = courses.get(i);
+                this.addCourse(c);
+            }
+            controller++;
+
+        }else{
+            Message = "Ya se ha llenado la base de datos";
+        }
+
+        return  Message;
+    }
+    //LLENADO DE INFORMACION
+
+    //
 }
