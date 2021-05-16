@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
+import com.example.controlprocesosadministrativos.Models.Local;
+import com.example.controlprocesosadministrativos.Models.Student;
 import com.example.controlprocesosadministrativos.Tables.Tables;
 
 import java.util.ArrayList;
@@ -37,6 +39,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " "+tables.courseFields[1]+" TEXT ," +
                 ""+tables.courseFields[2]+" TEXT," +
                 ""+tables.courseFields[3]+" INTEGER)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.studentTable + "("+tables.studentFields[0]+" VARCHAR(7) NOT NULL PRIMARY KEY ," +
+                " "+tables.studentFields[1]+" TEXT ," +
+                ""+tables.studentFields[2]+" TEXT)");
+
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.localTable + "("+tables.localFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                ""+tables.localFields[1]+" TEXT)");
     }
 
     @Override
@@ -44,6 +54,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
        // db.execSQL(" DROP TABLE IF EXISTS " + tables.userTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.careerTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.courseTable);
+        db.execSQL(" DROP TABLE IF EXISTS " + tables.studentTable);
+        db.execSQL(" DROP TABLE IF EXISTS " + tables.localTable);
         onCreate(db);
     }
 
@@ -354,7 +366,110 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return course;
         }
     }
+
     //METODOS PARA ASIGNATURA
+
+    //METODOS PARA LOCAL
+
+    public List<Local> getLocals(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Local> locals= new ArrayList<Local>();
+        Local local;
+        Cursor cursor = db.query(tables.localTable, tables.localFields, null, null, null , null, null);
+
+        while(cursor.moveToNext()){
+            local  = new Local();
+            local.setId(cursor.getInt(0));
+            local. setLocal(cursor.getString(1));
+            locals.add(local);
+        }
+        db.close();
+        return locals;
+    }
+
+
+    public Local getLocal(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] data = {id};
+        Cursor cursor = db.query(tables.localTable, tables.localFields, tables.localFields[0]+" = ?",
+                data , null, null, null);
+        Local local = new Local();
+        if(cursor.moveToFirst()){
+            local.setId(cursor.getInt(0));
+            local.setLocal(cursor.getString(1));
+            db.close();
+            return local;
+        }else{
+            db.close();
+            return local;
+        }
+    }
+
+
+    public String addLocal(Local local){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String message="";
+        long contador=0;
+        ContentValues Values = new ContentValues();
+        Values.put(tables.localFields[1], local.getLocal() );
+        contador=db.insert(tables.localTable, null, Values);
+
+        if(contador==-1 || contador==0)
+        {
+            message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            message="Carrera agregada correctamente";
+        }
+        db.close();
+        return message;
+    }
+    //METODOS PARA LOCAL
+
+    //METODOS PARA ALUMNO
+
+    public Student getStudent(String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] carnet = {code};
+        Cursor cursor = db.query(tables.studentTable, tables.studentFields, tables.studentFields[0]+" = ?",
+                carnet , null, null, null);
+        Student student= new Student();
+        if(cursor.moveToFirst()){
+            student.setCarnet(cursor.getString(0));
+            student.setName(cursor.getString(1));
+            student.setCareerId(cursor.getInt(2));
+            db.close();
+            return student;
+        }else{
+            db.close();
+            return student;
+        }
+    }
+
+
+    public String addStudent(Student student){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String message="";
+        long contador=0;
+        ContentValues Values = new ContentValues();
+        Values.put(tables.studentFields[0], student.getCarnet());
+        Values.put(tables.studentFields[1], student.getName() );
+        Values.put(tables.studentFields[2], student.getCareerId() );
+        contador=db.insert(tables.studentTable, null, Values);
+
+        if(contador==-1 || contador==0)
+        {
+            message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            message="Carrera agregada correctamente";
+        }
+        db.close();
+        return message;
+    }
+    //METODOS PARA ALUMNO
+
+    //LLENADO DE INFORMACION
 
     public String dbInsertData(){
         int controller = 0;
@@ -369,6 +484,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             List<Course> courses = new ArrayList<>();
             courses = Help.courseDB();
 
+            List<Local> locals = new ArrayList<>();
+             locals = Help.localDB();
+
+            List<Student> students = new ArrayList<>();
+            students = Help.studentsDB();
+
             for (int i = 0; i <careers.size() ; i++) {
                 Career c = new Career();
                 c = careers.get(i);
@@ -380,6 +501,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 c = courses.get(i);
                 this.addCourse(c);
             }
+
+            for (int i = 0; i <locals.size() ; i++) {
+                Local c = new Local();
+                c = locals.get(i);
+                this.addLocal(c);
+            }
+
+            for (int i = 0; i <students.size() ; i++) {
+                Student c = new Student();
+                c = students.get(i);
+                this.addStudent(c);
+            }
             controller++;
 
         }else{
@@ -390,5 +523,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     //LLENADO DE INFORMACION
 
-    //
+
 }

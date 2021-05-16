@@ -15,6 +15,7 @@ import com.example.controlprocesosadministrativos.MainActivity;
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class CourseSearchActivity extends AppCompatActivity {
     private DataBaseHelper DB;
@@ -24,6 +25,7 @@ public class CourseSearchActivity extends AppCompatActivity {
     private TextView codetxt;
     private TextView coursetxt;
     private TextView courseCareertxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

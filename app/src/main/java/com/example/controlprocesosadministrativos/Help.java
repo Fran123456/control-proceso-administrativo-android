@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
+import com.example.controlprocesosadministrativos.Models.Local;
+import com.example.controlprocesosadministrativos.Models.Student;
 import com.example.controlprocesosadministrativos.Utility.Menu;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -57,33 +59,41 @@ public class Help  {
     }
 
     public static List<Menu> getMenusHome(){
-        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","administra carreras (Crear, modificar, eliminar)", R.drawable.carrera,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CourseActivities.CourseMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("LLENAR DB","Llena con datos inicial la DB", R.drawable.db,"db"));
+        List<Menu> item = new ArrayList<>();
+        item.add(new Menu("CARRERAS","administra carreras (Crear, modificar, eliminar)", R.drawable.carrera,"CareerActivities.CareerMenuActivity"));
+        item.add(new Menu("ASIGNATURAS","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CourseActivities.CourseMenuActivity"));
+        item.add(new Menu("DIFERIDOS","administrar solicitudes diferidas", R.drawable.test,"DeferredTestActivities.DeferredMenuActivity"));
+        item.add(new Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
+        item.add(new Menu("LLENAR DB","Llena con datos inicial la DB", R.drawable.db,"db"));
         return item;
     }
 
     public static List<Menu> getMenusCareer(){
-        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una carrera", R.drawable.agregar,"CareerActivities.CareerAddActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una carrera existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
+        List<Menu> item = new ArrayList<>();
+        item.add(new Menu("AGREGAR","Agregar una carrera", R.drawable.agregar,"CareerActivities.CareerAddActivity"));
+        item.add(new Menu("BUSCAR","Buscar una carrera existente", R.drawable.search,"CareerActivities.CareerSearchActivity"));
        // item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ELIMINAR","Eliminar una carrera existente", R.drawable.eliminar,"CareerActivities.CareerMenuActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("CARRERAS","Administrar carreras", R.drawable.lista,"CareerActivities.CareerListActivity"));
+        item.add(new Menu("CARRERAS","Administrar carreras", R.drawable.lista,"CareerActivities.CareerListActivity"));
         return item;
     }
 
 
 
     public static List<Menu> getMenusCourse(){
-        List<com.example.controlprocesosadministrativos.Utility.Menu> item = new ArrayList<>();
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("AGREGAR","Agregar una asignatura", R.drawable.agregar,"CourseActivities.CourseAddActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("BUSCAR","Buscar una asignatura existente", R.drawable.search,"CourseActivities.CourseSearchActivity"));
-        item.add(new com.example.controlprocesosadministrativos.Utility.Menu("ASIGNATURAS","Administrar asignaturas", R.drawable.lista,"CourseActivities.CourseListActivity"));
+        List<Menu> item = new ArrayList<>();
+        item.add(new Menu("AGREGAR","Agregar una asignatura", R.drawable.agregar,"CourseActivities.CourseAddActivity"));
+        item.add(new Menu("BUSCAR","Buscar una asignatura existente", R.drawable.search,"CourseActivities.CourseSearchActivity"));
+        item.add(new Menu("ASIGNATURAS","Administrar asignaturas", R.drawable.lista,"CourseActivities.CourseListActivity"));
         return item;
     }
 
+
+    public static List<Menu> getMenusDeferred(){
+        List<Menu> item = new ArrayList<>();
+        item.add(new Menu("VER","Ver solicitudes de diferidos", R.drawable.test,"CourseActivities.CourseAddActivity"));
+        item.add(new Menu("NUEVA SOLICITUD","Crear solicitud de diferido", R.drawable.agregar,"DeferredTestActivities.DeferredTestAddActivity"));
+        return item;
+    }
 
 
     public static List<Career> carreersDB(){
@@ -116,5 +126,35 @@ public class Help  {
         }
         return courseList;
     }
+
+    public static List<Student> studentsDB(){
+        List<Student> studentsList = new ArrayList<>();
+        String[] carnets={"NH16001", "MP14001","OP19356","HV10001", "SP01003"};
+        String[] name={"Francisco Jose Navas Hernandez","Mario Alfonzo Martines Prado", "Olga Daniela Ortega Palacios" ,"Zulma Alma Hernandez Valle", "Samantha Sarai Silva Perez"};
+
+        for (int i = 0; i <carnets.length ; i++) {
+            Student student = new Student();
+            student.setCarnet( carnets[i] );
+            student.setName( name[i]);
+            student.setCareerId( 1 );
+            studentsList.add(student);
+        }
+        return studentsList;
+    }
+
+
+    public static List<Local> localDB(){
+        List<Local> localLists = new ArrayList<>();
+        String[] locals={"Local A", "Local B", "Local C", "Local D"};
+
+        for (int i = 0; i <locals.length ; i++) {
+            Local local = new Local();
+            local.setLocal( locals[i] );
+            localLists.add(local);
+        }
+        return localLists;
+    }
+
+
 
 }

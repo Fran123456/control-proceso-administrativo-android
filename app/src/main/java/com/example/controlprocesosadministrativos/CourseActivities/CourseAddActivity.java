@@ -39,6 +39,8 @@ public class CourseAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
         setTitle("Agrega una asignatura");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         comboCareers = (Spinner)findViewById(R.id.spinnerCareers_combo);
         DB = new DataBaseHelper(this);
         course = new Course();
