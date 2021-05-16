@@ -224,6 +224,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(tables.careerTable, cv, tables.careerFields[0]+" = ?", id);
         return "Registro Actualizado Correctamente";
     }
+
+
     //METODOS PARA CARRERA
 
 
@@ -267,5 +269,93 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return courses;
     }
+
+    public List<Course> getCoursesByCareer(int careerid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Course> courses= new ArrayList<Course>();
+        Course course;
+
+        String selection = tables.courseFields[3]+ "=?";
+        String [] selectionargs = { String.valueOf(careerid) };
+        Cursor cursor = db.query(tables.courseTable, tables.courseFields, selection, selectionargs, null , null, null);
+
+
+        while(cursor.moveToNext()){
+            course  = new Course();
+            course.setId(cursor.getInt(0));
+            course. setCodeCourse(cursor.getString(1));
+            course.setCourse(cursor.getString(2));
+            course.setCarrerId(cursor.getInt(3));
+            courses.add(course);
+        }
+        db.close();
+        return courses;
+    }
+
+
+    public String deleteCourse(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String regAfectados="Asignatura eliminada correctamente";
+        int contador=0;
+        //  if (verificarIntegridad(alumno,3)) {
+        //     contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        // }
+        contador+=db.delete(tables.courseTable, tables.courseFields[0]+"='"+id+"'", null);
+        db.close();
+        return regAfectados;
+    }
+
+    public String editCourse (Course course){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] id = { String.valueOf(course.getId()) };
+        ContentValues cv = new ContentValues();
+        cv.put(tables.courseFields[1], course.getCodeCourse());
+        cv.put(tables.courseFields[2], course.getCourse());
+        cv.put(tables.courseFields[3], course.getCarrerId());
+        db.update(tables.courseTable, cv, tables.courseFields[0]+" = ?", id);
+        return "Registro Actualizado Correctamente";
+    }
+
+    public Course getCourseByCode(String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] codeCourse = {code};
+        Cursor cursor = db.query(tables.courseTable, tables.courseFields, tables.courseFields[1]+" = ?",
+                codeCourse , null, null, null);
+        Course course = new Course();
+        if(cursor.moveToFirst()){
+            course.setId(cursor.getInt(0));
+            course.setCodeCourse(cursor.getString(1));
+            course.setCourse(cursor.getString(2));
+            course.setCarrerId(cursor.getInt(3));
+            db.close();
+            return course;
+        }else{
+            db.close();
+            return course;
+        }
+    }
+
+
+    public Course getCourse(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] codeCourse = {id};
+        Cursor cursor = db.query(tables.courseTable, tables.courseFields, tables.courseFields[0]+" = ?",
+                codeCourse , null, null, null);
+        Course course = new Course();
+        if(cursor.moveToFirst()){
+            course.setId(cursor.getInt(0));
+            course.setCodeCourse(cursor.getString(1));
+            course.setCourse(cursor.getString(2));
+            course.setCarrerId(cursor.getInt(3));
+            db.close();
+            return course;
+        }else{
+            db.close();
+            return course;
+        }
+    }
+
+
+
     //METODOS PARA ASIGNATURA
 }

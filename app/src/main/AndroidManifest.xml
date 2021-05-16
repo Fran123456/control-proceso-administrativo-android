@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
-        <activity android:name=".CourseActivities.CourseListActivity"></activity>
-        <activity android:name=".CourseActivities.CourseAddActivity" />
+        <activity android:name=".CourseActivities.CourseEditActivity"
+            android:parentActivityName=".CourseActivities.CourseMenuActivity"></activity>
+        <activity android:name=".CourseActivities.CourseSearchActivity"
+            android:parentActivityName=".CourseActivities.CourseMenuActivity"/>
+        <activity android:name=".CourseActivities.CourseListActivity"
+            android:parentActivityName=".CareerActivities.CareerMenuActivity"/>
+        <activity android:name=".CourseActivities.CourseAddActivity"
+            android:parentActivityName=".CourseActivities.CourseMenuActivity"/>
         <activity
             android:name=".CourseActivities.CourseMenuActivity"
             android:parentActivityName=".HomeActivity" />

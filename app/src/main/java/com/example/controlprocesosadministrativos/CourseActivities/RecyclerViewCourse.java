@@ -77,8 +77,7 @@ public class RecyclerViewCourse extends RecyclerView.Adapter<RecyclerViewCourse.
             public void onClick(View view) {
                 //
                 DB = new DataBaseHelper(view.getContext());
-                // String message= DB.deleteCareer(menuList.get(position).getId());
-                String message = "dembele";
+                String message= DB.deleteCourse(menuList.get(position).getId());
                 menuList.clear();
                 menuList.addAll(DB.getCourses());
                 notifyDataSetChanged();
@@ -91,10 +90,10 @@ public class RecyclerViewCourse extends RecyclerView.Adapter<RecyclerViewCourse.
             @Override
             public void onClick(View view) {
                 try {
-                    Class<?> clase = Class.forName("com.example.controlprocesosadministrativos.CareerActivities.CareerEditActivity");
-                    //   Intent inte = new Intent(view.getContext(), clase);
-                    //   inte.putExtra("id", String.valueOf( menuList.get(position).getId() ) );
-                    //   view.getContext().startActivity(inte);
+                    Class<?> clase = Class.forName("com.example.controlprocesosadministrativos.CourseActivities.CourseEditActivity");
+                       Intent inte = new Intent(view.getContext(), clase);
+                       inte.putExtra("id", String.valueOf( menuList.get(position).getId() ) );
+                       view.getContext().startActivity(inte);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

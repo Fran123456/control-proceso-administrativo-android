@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
 import com.example.controlprocesosadministrativos.Models.Career;
+import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.R;
 import com.example.controlprocesosadministrativos.Utility.Menu;
 
@@ -66,21 +67,20 @@ public class RecyclerViewCareer extends RecyclerView.Adapter<RecyclerViewCareer.
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
+
                 DB = new DataBaseHelper(view.getContext());
-                String message= DB.deleteCareer(menuList.get(position).getId());
-                menuList.clear();
-                menuList.addAll(DB.getCareers());
-                notifyDataSetChanged();
-                Toast.makeText( view.getContext() ,message, Toast.LENGTH_LONG ).show();
-               /* try{
-                    Class<?> clase=Class.forName("com.example.controlprocesosadministrativos.CareerActivities.CareerDeleteActivity");
-                    Intent inte = new Intent(view.getContext(), clase);
-                    inte.putExtra("id",  menuList.get(position).getId()  );
-                    view.getContext().startActivity(inte);
-                }catch(ClassNotFoundException e){
-                    e.printStackTrace();
-                }*/
+
+                List<Course> coursesList =DB.getCoursesByCareer(menuList.get(position).getId());
+                if(coursesList.size() > 0){
+                    Toast.makeText( view.getContext() ,"No se puede eliminar porque la carrera esta siendo utilizada por alguna asignatura o mas", Toast.LENGTH_LONG ).show();
+                }else{
+                    String message= DB.deleteCareer(menuList.get(position).getId());
+                    menuList.clear();
+                    menuList.addAll(DB.getCareers());
+                    notifyDataSetChanged();
+                    Toast.makeText( view.getContext() ,message, Toast.LENGTH_LONG ).show();
+                }
+                
             }
         });
 

@@ -14,4 +14,8 @@
     <string name="eliminar">Eliminar</string>
     <string name="todo">TODO</string>
     <string name="editar">EDITAR</string>
+    <string name="sin_resultado">Sin resultado</string>
+
+    <string name="resultado">Resultado:</string>
+    <string name="buscar">BUSCAR</string>
 </resources>
