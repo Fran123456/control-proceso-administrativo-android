@@ -17,5 +17,7 @@ public class Tables {
     public static  String[] localFields = new String []{"id","local"};
 
     public static String deferredTable ="deferred";
-    public static  String[] deferredFields = new String []{"id","date","time","local_id","student_id"};
+    public static  String[] deferredFields = new String []{"id","date","time","local_id","student_id","career_id"};
+
+
 }

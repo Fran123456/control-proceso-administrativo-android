@@ -469,6 +469,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     //METODOS PARA ALUMNO
 
+
+    //METODOS PARA DIFERIDOS
+    public String addDiferred(Local local){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String message="";
+        long contador=0;
+        ContentValues Values = new ContentValues();
+        Values.put(tables.localFields[1], local.getLocal() );
+        contador=db.insert(tables.localTable, null, Values);
+
+        if(contador==-1 || contador==0)
+        {
+            message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            message="Carrera agregada correctamente";
+        }
+        db.close();
+        return message;
+    }
+    //METODOS PARA DIFERIDOS
+
+
+
+
     //LLENADO DE INFORMACION
 
     public String dbInsertData(){

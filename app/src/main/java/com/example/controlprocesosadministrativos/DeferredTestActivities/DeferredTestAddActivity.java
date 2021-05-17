@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class DeferredTestAddActivity extends AppCompatActivity {
     private EditText editTime;
     private EditText editDate;
     private EditText courseSearch;
+    private Button savebtn;
 
     private TextView studentSelected;
     private TextView courseSelected;
@@ -63,7 +65,9 @@ public class DeferredTestAddActivity extends AppCompatActivity {
         studentSearch = (EditText)findViewById(R.id.studentSearchAddDeferred_txt);
         studentSelected = (TextView)findViewById(R.id.studentSelected_deferred);
         courseSearch =(EditText)findViewById(R.id.courseSearchAddDeferred_txt);
-
+        courseSelected = (TextView)findViewById(R.id.courseSelected_deferred);
+        savebtn = (Button)findViewById(R.id.btnDeferredSave_btn);
+        savebtn.setEnabled(false);
 
         this.LocalListToStringList();
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, localsString);
@@ -94,6 +98,25 @@ public class DeferredTestAddActivity extends AppCompatActivity {
             studentSelected.setText(student.getCarnet() + " - " + student.getName());
         }else{
             studentSelected.setText("Estudiante seleccionado: Sin resultado en la busqueda");
+        }
+        this.EnablerBtn();
+    }
+
+
+    public void getCourse(View v){
+        course = DB.getCourseByCode(courseSearch.getText().toString());
+
+        if(course.getCodeCourse() != null){
+            courseSelected.setText(course.getCodeCourse() + " - " + course.getCourse());
+        }else{
+            courseSelected.setText("Asignatura seleccionada: Sin resultado en la busqueda");
+        }
+        this.EnablerBtn();
+    }
+
+    private void EnablerBtn(){
+        if(course.getCourse() != null && student.getName() != null){
+            savebtn.setEnabled(true);
         }
     }
 
