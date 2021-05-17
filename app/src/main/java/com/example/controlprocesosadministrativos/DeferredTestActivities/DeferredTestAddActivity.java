@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.DataBaseHelper;
 import com.example.controlprocesosadministrativos.Help;
@@ -20,6 +21,7 @@ import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.Models.Local;
 import com.example.controlprocesosadministrativos.Models.Student;
+import com.example.controlprocesosadministrativos.Models.TestDiferred;
 import com.example.controlprocesosadministrativos.R;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class DeferredTestAddActivity extends AppCompatActivity {
     private DataBaseHelper DB;
     private Local local;
     private Course course;
+    private TestDiferred test;
     private Student student;
     private EditText studentSearch;
     private EditText editTime;
@@ -56,6 +59,7 @@ public class DeferredTestAddActivity extends AppCompatActivity {
         local= new Local();
         student = new Student();
         course = new Course();
+        test = new TestDiferred();
         localLists = new ArrayList<Local>();
         localsString= new ArrayList<String>();
         localLists = DB.getLocals();
@@ -88,6 +92,26 @@ public class DeferredTestAddActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    public void saveTest(View v){
+        test.setDate( editDate.getText().toString()  );
+        test.setTime( editTime.getText().toString());
+        test.setLocalId( local.getId() );
+        test.setCourseId(course.getId());
+        test.setStudentId(student.getCarnet());
+
+        editDate.setText("");
+        editTime.setText("");
+        courseSearch.setText("");
+        studentSearch.setText("");
+        courseSelected.setText("Asignatura seleccionada: Sin resultado");
+        studentSelected.setText("Estudiante seleccionado: Sin resultado");
+
+        String message = DB.addDiferred(test);
+        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
     }
 
 

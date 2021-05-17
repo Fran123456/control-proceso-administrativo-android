@@ -11,6 +11,7 @@ import com.example.controlprocesosadministrativos.Models.Career;
 import com.example.controlprocesosadministrativos.Models.Course;
 import com.example.controlprocesosadministrativos.Models.Local;
 import com.example.controlprocesosadministrativos.Models.Student;
+import com.example.controlprocesosadministrativos.Models.TestDiferred;
 import com.example.controlprocesosadministrativos.Tables.Tables;
 
 import java.util.ArrayList;
@@ -40,13 +41,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 ""+tables.courseFields[2]+" TEXT," +
                 ""+tables.courseFields[3]+" INTEGER)");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.studentTable + "("+tables.studentFields[0]+" VARCHAR(7) NOT NULL PRIMARY KEY ," +
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.studentTable + "("+tables.studentFields[0]+" VARCHAR(10) NOT NULL PRIMARY KEY ," +
                 " "+tables.studentFields[1]+" TEXT ," +
                 ""+tables.studentFields[2]+" TEXT)");
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.localTable + "("+tables.localFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
                 ""+tables.localFields[1]+" TEXT)");
+
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+tables.deferredTable + "("+tables.deferredFields[0]+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                " "+tables.deferredFields[1]+" TEXT," +
+                " "+tables.deferredFields[2]+" TEXT," +
+                " "+tables.deferredFields[3]+" INTEGER," +
+                " "+tables.deferredFields[4]+" VARCHAR(10)," +
+                " "+tables.deferredFields[5]+" INTEGER)");
     }
 
     @Override
@@ -56,6 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(" DROP TABLE IF EXISTS " + tables.courseTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.studentTable);
         db.execSQL(" DROP TABLE IF EXISTS " + tables.localTable);
+        db.execSQL(" DROP TABLE IF EXISTS " + tables.deferredTable);
         onCreate(db);
     }
 
@@ -471,23 +481,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     //METODOS PARA DIFERIDOS
-    public String addDiferred(Local local){
+    public String addDiferred(TestDiferred test){
         SQLiteDatabase db = this.getWritableDatabase();
         String message="";
         long contador=0;
         ContentValues Values = new ContentValues();
-        Values.put(tables.localFields[1], local.getLocal() );
-        contador=db.insert(tables.localTable, null, Values);
+        Values.put(tables.deferredFields[1], test.getDate() );
+        Values.put(tables.deferredFields[2], test.getTime() );
+        Values.put(tables.deferredFields[3], test.getLocalId() );
+        Values.put(tables.deferredFields[4], test.getStudentId() );
+        Values.put(tables.deferredFields[5], test.getCourseId() );
+        contador=db.insert(tables.deferredTable, null, Values);
 
         if(contador==-1 || contador==0)
         {
             message= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
         }
         else {
-            message="Carrera agregada correctamente";
+            message="Prueba diferida agregada correctamente";
         }
         db.close();
         return message;
+    }
+
+
+    public List<TestDiferred> getTests(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<TestDiferred> tests= new ArrayList<TestDiferred>();
+        TestDiferred t;
+        Cursor cursor = db.query(tables.deferredTable, tables.deferredFields, null, null, null , null, null);
+
+        while(cursor.moveToNext()){
+            t  = new   TestDiferred ();
+            t.setId(cursor.getInt(0));
+            t.setTime(cursor.getString(1));
+            t.setDate(cursor.getString(2));
+            t.setLocalId(cursor.getInt(3));
+            t.setStudentId(cursor.getString(4));
+            t.setCourseId(cursor.getInt(5));
+            tests.add(t);
+        }
+        db.close();
+        return tests;
     }
     //METODOS PARA DIFERIDOS
 
