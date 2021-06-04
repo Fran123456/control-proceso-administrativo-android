@@ -11,8 +11,14 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
-        <activity android:name=".TeacherActivities.TeacherListActivity"  android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".CycleActivities.CycleListActivity"   android:parentActivityName=".HomeActivity"/>
+        <activity android:name=".CycleActivities.CycleAddActivity"></activity>
+        <activity android:name=".TeacherActivities.TeacherAddActivity" />
+        <activity
+            android:name=".TeacherActivities.TeacherListActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".CycleActivities.CycleListActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".DeferredTestActivities.DeferredListActivity"
             android:parentActivityName=".DeferredTestActivities.DeferredMenuActivity" />

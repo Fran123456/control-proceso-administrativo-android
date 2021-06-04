@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.Help;
@@ -29,6 +30,7 @@ public class TeacherListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewTeacher adapter;
     public List<Teacher> menuList;
+    Button agregarbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,29 @@ public class TeacherListActivity extends AppCompatActivity {
         setTitle("DOCENTES ");
         menuList = new ArrayList<>();
         getTeachers();
+        agregarbtn = findViewById(R.id.btnAgregar_teacher);
+
+
+        agregarbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //vamos a pasar a otra activity
+                try{
+                    Class<?>
+                            clase=Class.forName("com.example.controlprocesosadministrativos.TeacherActivities.TeacherAddActivity");
+                    Intent inte = new Intent(getApplicationContext(), clase);
+                    //  inte.putExtra("titulo",  "Hola" );
+                    startActivity(inte);
+                }catch(ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+
+                //Toast.makeText(getApplicationContext(),getMenus().get(recyclerView.getChildAdapterPosition(v)).getTitle(), Toast.LENGTH_LONG ).show();
+            }
+        });
+
+
+
     }
 
 
@@ -60,15 +85,15 @@ public class TeacherListActivity extends AppCompatActivity {
                         adapter= new RecyclerViewTeacher(list);
                         recyclerView.setAdapter(adapter);
 
-                        adapter.setOnClickListener(new View.OnClickListener(){
+                        /* adapter.setOnClickListener(new View.OnClickListener(){
                             @Override
-                            public void onClick(View v) {
+                           public void onClick(View v) {
                                 //  Toast.makeText( getApplicationContext() ,"si" , Toast.LENGTH_LONG).show();
                                 //vamos a pasar a otra activity
 
                                 try{
                                     Class<?>
-                                            clase=Class.forName("com.fiares.UnidadesActivities.UnidadActivity");
+                                            clase=Class.forName("com.example.controlprocesosadministrativos");
                                     Intent inte = new Intent(getApplicationContext(), clase);
                                     inte.putExtra("id", String.valueOf( menuList.get(recyclerView.getChildAdapterPosition(v)).getId() ) );
                                     //inte.putExtra("id",  "Hola" );
@@ -78,7 +103,7 @@ public class TeacherListActivity extends AppCompatActivity {
                                 }
 
                             }
-                        });
+                        });*/
                         //  Toast.makeText(getApplicationContext(),list.size() , Toast.LENGTH_LONG).show();
                     }
                 }catch(Exception ex){

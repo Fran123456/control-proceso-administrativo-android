@@ -6,16 +6,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.controlprocesosadministrativos.CycleActivities.RecyclerViewCycle;
 import com.example.controlprocesosadministrativos.Models.Cycle;
+import com.example.controlprocesosadministrativos.Models.CycleApi;
+import com.example.controlprocesosadministrativos.Models.Success;
 import com.example.controlprocesosadministrativos.Models.Teacher;
+import com.example.controlprocesosadministrativos.Models.TeacherApi;
 import com.example.controlprocesosadministrativos.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecyclerViewTeacher extends RecyclerView.Adapter<RecyclerViewTeacher.ViewHolder> implements View.OnClickListener{
     public List<Teacher> menuList;
@@ -73,7 +84,55 @@ public class RecyclerViewTeacher extends RecyclerView.Adapter<RecyclerViewTeache
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://nh16001.000webhostapp.com/servicios-web-pdm/").addConverterFactory(GsonConverterFactory.create()).build();
+                TeacherApi teacherApi = retrofit.create(TeacherApi.class);
+                Call<Success> call = teacherApi.eliminar(RecyclerViewTeacher.this.menuList.get(position).getId());
+                Success success = new Success();
+                call.enqueue(new Callback<Success>() {
+                    @Override
+                    public void onResponse(Call<Success> call, Response<Success> response) {
+                        try{
+                            if(response.isSuccessful()){
+                                //Toast.makeText(view.getContext(), response.body().getSuccess() , Toast.LENGTH_LONG).show();
+                                RecyclerViewTeacher.this.menuList.clear();
+
+                                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://nh16001.000webhostapp.com/servicios-web-pdm/").addConverterFactory(GsonConverterFactory.create()).build();
+                                TeacherApi teacherApi = retrofit.create(TeacherApi.class);
+                                Call<List<Teacher>> call2 = teacherApi.contenido();
+                                List<Teacher> list = new ArrayList<>();
+                                call2.enqueue(new Callback<List<Teacher>>() {
+                                    @Override
+                                    public void onResponse(Call<List<Teacher>> call, Response<List<Teacher >> response) {
+                                        try{
+                                            if(response.isSuccessful()){
+                                                //  list.addAll(response.body());
+                                                RecyclerViewTeacher.this.menuList.clear();
+                                                RecyclerViewTeacher.this.menuList.addAll(response.body());
+                                                RecyclerViewTeacher.this.notifyDataSetChanged();
+                                                Toast.makeText(view.getContext(), "Eliminado correctamente", Toast.LENGTH_LONG).show();
+                                            }
+                                        }catch(Exception ex){
+                                            Toast.makeText(view.getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<List<Teacher>> call, Throwable t) {
+                                        Toast.makeText(view.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+                        }catch(Exception ex){
+                            Toast.makeText(view.getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Success> call, Throwable t) {
+                        Toast.makeText(view.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
         });
