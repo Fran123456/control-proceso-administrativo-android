@@ -40,7 +40,7 @@ public class CycleListActivity extends AppCompatActivity {
     }
 
 
-    private void getCycles(){
+    public void getCycles(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://nh16001.000webhostapp.com/servicios-web-pdm/").addConverterFactory(GsonConverterFactory.create()).build();
         CycleApi cycleApi = retrofit.create(CycleApi.class);
         Call<List<Cycle>> call = cycleApi.contenido();
@@ -59,7 +59,7 @@ public class CycleListActivity extends AppCompatActivity {
                         adapter= new RecyclerViewCycle(list);
                         recyclerView.setAdapter(adapter);
 
-                        adapter.setOnClickListener(new View.OnClickListener(){
+                       /* adapter.setOnClickListener(new View.OnClickListener(){
                             @Override
                             public void onClick(View v) {
                               //  Toast.makeText( getApplicationContext() ,"si" , Toast.LENGTH_LONG).show();
@@ -77,7 +77,7 @@ public class CycleListActivity extends AppCompatActivity {
                                 }
 
                             }
-                        });
+                        });*/
                         //  Toast.makeText(getApplicationContext(),list.size() , Toast.LENGTH_LONG).show();
                     }
                 }catch(Exception ex){
