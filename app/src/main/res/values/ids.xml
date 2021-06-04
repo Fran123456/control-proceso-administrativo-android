@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="studentdeferred_list" type="id" />
+    <item name="carnetdeferred_list" type="id" />
+    <item name="coursedeferred_list" type="id" />
+    <item name="palcedeferred_list" type="id" />
+    <item name="timecedeferred_list" type="id" />
+    <item name="datecedeferred_list" type="id" />
+    <item name="deleteDiferred_btn" type="id" />
+    <item name="soldeferred_list" type="id" />
+    <item name="recycleMenuDeferred" type="id" />
+    <item name="recyclerDeferred" type="id" />
+</resources>

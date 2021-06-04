@@ -436,6 +436,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     //METODOS PARA LOCAL
 
+    public String deleteDiferredTest(int i) {
+        SQLiteDatabase writableDatabase = getWritableDatabase();
+        String str = Tables.deferredTable;
+        writableDatabase.delete(str, Tables.deferredFields[0] + "='" + i + "'", (String[]) null);
+        writableDatabase.close();
+        return "Solicitud de diferido eliminada correctamente";
+    }
+
     //METODOS PARA ALUMNO
 
     public Student getStudent(String code){
