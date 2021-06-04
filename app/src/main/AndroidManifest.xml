@@ -14,6 +14,10 @@
             android:name=".DeferredTestActivities.DeferredListActivity"
             android:parentActivityName=".DeferredTestActivities.DeferredMenuActivity" />
         <activity
+            android:name=".DeferredTestActivities.DeferredTestAddActivity"
+            android:parentActivityName=".DeferredTestActivities.DeferredMenuActivity" />
+
+        <activity
             android:name=".DeferredTestActivities.DeferredMenuActivity"
             android:parentActivityName=".HomeActivity" />
         <activity
