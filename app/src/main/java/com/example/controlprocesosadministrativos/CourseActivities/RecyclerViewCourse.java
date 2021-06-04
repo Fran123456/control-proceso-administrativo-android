@@ -40,11 +40,11 @@ public class RecyclerViewCourse extends RecyclerView.Adapter<RecyclerViewCourse.
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView)itemView.findViewById(R.id.txtCourseList_list);
-            deletebtn = (Button)itemView.findViewById(R.id.btnCourseDelete_list) ;
-            image=(ImageView)itemView.findViewById(R.id.imgCourseList_list);
-            editbtn=(Button)itemView.findViewById(R.id.btnCourseEdit_list);
-            careertxt=(TextView) itemView.findViewById(R.id.txtCourseCareerList_list);
+            title = (TextView)itemView.findViewById(R.id.txtcycle_i);
+            deletebtn = (Button)itemView.findViewById(R.id.btncycle_delete) ;
+            image=(ImageView)itemView.findViewById(R.id.imgCycle_img);
+            editbtn=(Button)itemView.findViewById(R.id.btncycle_edit);
+            careertxt=(TextView) itemView.findViewById(R.id.txtcycle_f);
 
         }
     }

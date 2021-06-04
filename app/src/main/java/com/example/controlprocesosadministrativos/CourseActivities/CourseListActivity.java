@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.controlprocesosadministrativos.CareerActivities.RecyclerViewCareer;
 import com.example.controlprocesosadministrativos.DataBaseHelper;
 import com.example.controlprocesosadministrativos.Help;
 import com.example.controlprocesosadministrativos.MainActivity;
@@ -36,7 +35,7 @@ public class CourseListActivity extends AppCompatActivity {
         coursesList= new ArrayList<Course>();
         coursesList= DB.getCourses();
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerCourse);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerCycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter= new RecyclerViewCourse(coursesList);
         recyclerView.setAdapter(adapter);

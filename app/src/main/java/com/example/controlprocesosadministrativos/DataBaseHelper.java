@@ -524,6 +524,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return tests;
     }
+
+    public String deleteDiferredTest(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String regAfectados="Solicitud de diferido eliminada correctamente";
+        int contador=0;
+        //  if (verificarIntegridad(alumno,3)) {
+        //     contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        // }
+        contador+=db.delete(tables.deferredTable, tables.deferredFields[0]+"='"+id+"'", null);
+        db.close();
+        return regAfectados;
+    }
     //METODOS PARA DIFERIDOS
 
 

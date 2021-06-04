@@ -64,6 +64,8 @@ public class Help  {
         item.add(new Menu("ASIGNATURAS","administra asignaturas (Crear, modificar, eliminar)", R.drawable.subject,"CourseActivities.CourseMenuActivity"));
         item.add(new Menu("DIFERIDOS","administrar solicitudes diferidas", R.drawable.test,"DeferredTestActivities.DeferredMenuActivity"));
         item.add(new Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
+        item.add(new Menu("CICLOS","administra los ciclos", R.drawable.date,"CycleActivities.CycleListActivity"));
+        item.add(new Menu("CICLOS","administra los docentes", R.drawable.date,"CycleActivities.CycleListActivity"));
         item.add(new Menu("LLENAR DB","Llena con datos inicial la DB", R.drawable.db,"db"));
         return item;
     }
@@ -90,7 +92,7 @@ public class Help  {
 
     public static List<Menu> getMenusDeferred(){
         List<Menu> item = new ArrayList<>();
-        item.add(new Menu("VER","Ver solicitudes de diferidos", R.drawable.test,"CourseActivities.CourseAddActivity"));
+        item.add(new Menu("VER","Ver solicitudes de diferidos", R.drawable.test,"DeferredTestActivities.DeferredListActivity"));
         item.add(new Menu("NUEVA SOLICITUD","Crear solicitud de diferido", R.drawable.agregar,"DeferredTestActivities.DeferredTestAddActivity"));
         return item;
     }
@@ -114,9 +116,10 @@ public class Help  {
     public static List<Course> courseDB(){
         List<Course> courseList = new ArrayList<>();
         //courses
-        String[] courseNames={"Programación para dispositivos moviles","Herramientas de productividad","Sistema de información gerencial",
-                "Recursos Humanos"};
-        String[] code={"PDM115","HDP115","SIG115", "RHU115"};
+        String[] courseNames={"Programación I","Programación II","Programación III",
+                "Estructuras de Datos","Métodos Probabilísticos","Análisis Numérico","Herramientas de Productividad","Arquitectura de Computadoras"
+        ,"Sistemas Contables","Diseño de Sistemas I","Microprogramación"};
+        String[] code={"PRN115","PRN215","PRN315", "ESD115","MEP115","ANS115","HDP115","ARC115", "SIC115", "DSI115", "MIP115"};
         for (int i = 0; i <code.length ; i++) {
             Course course = new Course();
             course.setCourse( courseNames[i] );
@@ -130,7 +133,11 @@ public class Help  {
     public static List<Student> studentsDB(){
         List<Student> studentsList = new ArrayList<>();
         String[] carnets={"NH16001", "MP14001","OP19356","HV10001", "SP01003"};
-        String[] name={"Francisco Jose Navas Hernandez","Mario Alfonzo Martines Prado", "Olga Daniela Ortega Palacios" ,"Zulma Alma Hernandez Valle", "Samantha Sarai Silva Perez"};
+        String[] name={ "Francisco Jose Navas Hernandez",
+                        "Mario Alfonzo Martines Prado",
+                        "Olga Daniela Ortega Palacios" ,
+                        "Zulma Alma Hernandez Valle",
+                        "Samantha Sarai Silva Perez"};
 
         for (int i = 0; i <carnets.length ; i++) {
             Student student = new Student();
@@ -145,7 +152,7 @@ public class Help  {
 
     public static List<Local> localDB(){
         List<Local> localLists = new ArrayList<>();
-        String[] locals={"Local A", "Local B", "Local C", "Local D"};
+        String[] locals={"Local A", "Local B", "Local C", "Local D", "Local E","Local F"};
 
         for (int i = 0; i <locals.length ; i++) {
             Local local = new Local();

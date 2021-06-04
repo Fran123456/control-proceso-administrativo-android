@@ -14,7 +14,7 @@
     tools:context=".CareerActivities.CareerListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCourse"
+        android:id="@+id/recyclerCycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
