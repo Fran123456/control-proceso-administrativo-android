@@ -35,7 +35,7 @@ public class CareerListActivity extends AppCompatActivity {
         careersList = new ArrayList<Career>();
         careersList= DB.getCareers();
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerCycle);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerTeacher);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
          adapter= new RecyclerViewCareer(careersList);
         recyclerView.setAdapter(adapter);

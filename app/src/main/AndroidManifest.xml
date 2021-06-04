@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.controlprocesosadministrativos">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_index"
@@ -9,14 +11,14 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
-        <activity android:name=".CycleActivities.CycleListActivity"></activity>
+        <activity android:name=".TeacherActivities.TeacherListActivity"  android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".CycleActivities.CycleListActivity"   android:parentActivityName=".HomeActivity"/>
         <activity
             android:name=".DeferredTestActivities.DeferredListActivity"
             android:parentActivityName=".DeferredTestActivities.DeferredMenuActivity" />
         <activity
             android:name=".DeferredTestActivities.DeferredTestAddActivity"
             android:parentActivityName=".DeferredTestActivities.DeferredMenuActivity" />
-
         <activity
             android:name=".DeferredTestActivities.DeferredMenuActivity"
             android:parentActivityName=".HomeActivity" />

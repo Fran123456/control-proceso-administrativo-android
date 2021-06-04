@@ -65,7 +65,7 @@ public class Help  {
         item.add(new Menu("DIFERIDOS","administrar solicitudes diferidas", R.drawable.test,"DeferredTestActivities.DeferredMenuActivity"));
         item.add(new Menu("PERFIL","administra tu perfil", R.drawable.user,"CareerActivities.CareerMenuActivity"));
         item.add(new Menu("CICLOS","administra los ciclos", R.drawable.date,"CycleActivities.CycleListActivity"));
-        item.add(new Menu("CICLOS","administra los docentes", R.drawable.date,"CycleActivities.CycleListActivity"));
+        item.add(new Menu("DOCENTES","administra los docentes", R.drawable.teacher2,"TeacherActivities.TeacherListActivity"));
         item.add(new Menu("LLENAR DB","Llena con datos inicial la DB", R.drawable.db,"db"));
         return item;
     }

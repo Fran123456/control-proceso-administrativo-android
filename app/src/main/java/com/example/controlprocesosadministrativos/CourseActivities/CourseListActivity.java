@@ -35,7 +35,7 @@ public class CourseListActivity extends AppCompatActivity {
         coursesList= new ArrayList<Course>();
         coursesList= DB.getCourses();
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerCycle);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerTeacher);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter= new RecyclerViewCourse(coursesList);
         recyclerView.setAdapter(adapter);

@@ -1,4 +1,4 @@
-package com.example.controlprocesosadministrativos.CycleActivities;
+package com.example.controlprocesosadministrativos.TeacherActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.example.controlprocesosadministrativos.Help;
 import com.example.controlprocesosadministrativos.MainActivity;
-import com.example.controlprocesosadministrativos.Models.Cycle;
-import com.example.controlprocesosadministrativos.Models.CycleApi;
+import com.example.controlprocesosadministrativos.Models.Teacher;
+import com.example.controlprocesosadministrativos.Models.TeacherApi;
 import com.example.controlprocesosadministrativos.R;
 
 import java.util.ArrayList;
@@ -25,44 +25,45 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CycleListActivity extends AppCompatActivity {
+public class TeacherListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerViewCycle adapter;
-    public List<Cycle> menuList;
+    private RecyclerViewTeacher adapter;
+    public List<Teacher> menuList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cycle_list);
+        setContentView(R.layout.activity_teacher_list);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("CICLOS ");
+        setTitle("DOCENTES ");
         menuList = new ArrayList<>();
-        getCycles();
+        getTeachers();
     }
 
 
-    private void getCycles(){
+    private void getTeachers(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://nh16001.000webhostapp.com/servicios-web-pdm/").addConverterFactory(GsonConverterFactory.create()).build();
-        CycleApi cycleApi = retrofit.create(CycleApi.class);
-        Call<List<Cycle>> call = cycleApi.contenido();
-        List<Cycle> list = new ArrayList<>();
-        call.enqueue(new Callback<List<Cycle>>() {
+        TeacherApi teacherApi = retrofit.create(TeacherApi.class);
+        Call<List<Teacher>> call = teacherApi.contenido();
+        List<Teacher> list = new ArrayList<>();
+        call.enqueue(new Callback<List<Teacher>>() {
             @Override
-            public void onResponse(Call<List<Cycle>> call, Response<List<Cycle>> response) {
+            public void onResponse(Call<List<Teacher>> call, Response<List<Teacher>> response) {
                 try{
                     if(response.isSuccessful()){
                         list.addAll(response.body());
-                       // response.body().get(0).getFecha_fin();
-                       // Toast.makeText(getApplicationContext(),"x"+ response.body().get(0).getFecha_fin().toString() , Toast.LENGTH_LONG).show();
+                        // response.body().get(0).getFecha_fin();
+                        // Toast.makeText(getApplicationContext(),"x"+ response.body().get(0).getFecha_fin().toString() , Toast.LENGTH_LONG).show();
                         menuList = response.body();
                         recyclerView = (RecyclerView)findViewById(R.id.recyclerTeacher);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adapter= new RecyclerViewCycle(list);
+                        adapter= new RecyclerViewTeacher(list);
                         recyclerView.setAdapter(adapter);
 
                         adapter.setOnClickListener(new View.OnClickListener(){
                             @Override
                             public void onClick(View v) {
-                              //  Toast.makeText( getApplicationContext() ,"si" , Toast.LENGTH_LONG).show();
+                                //  Toast.makeText( getApplicationContext() ,"si" , Toast.LENGTH_LONG).show();
                                 //vamos a pasar a otra activity
 
                                 try{
@@ -86,7 +87,7 @@ public class CycleListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Cycle>> call, Throwable t) {
+            public void onFailure(Call<List<Teacher>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -108,7 +109,4 @@ public class CycleListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

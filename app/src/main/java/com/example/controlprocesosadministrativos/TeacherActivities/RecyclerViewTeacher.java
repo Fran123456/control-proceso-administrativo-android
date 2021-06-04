@@ -1,4 +1,4 @@
-package com.example.controlprocesosadministrativos.CycleActivities;
+package com.example.controlprocesosadministrativos.TeacherActivities;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.controlprocesosadministrativos.CycleActivities.RecyclerViewCycle;
 import com.example.controlprocesosadministrativos.Models.Cycle;
+import com.example.controlprocesosadministrativos.Models.Teacher;
 import com.example.controlprocesosadministrativos.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class RecyclerViewCycle extends RecyclerView.Adapter<RecyclerViewCycle.ViewHolder> implements View.OnClickListener{
-
-    public List<Cycle> menuList;
+public class RecyclerViewTeacher extends RecyclerView.Adapter<RecyclerViewTeacher.ViewHolder> implements View.OnClickListener{
+    public List<Teacher> menuList;
     private View.OnClickListener listener;
 
     @Override
@@ -28,48 +29,45 @@ public class RecyclerViewCycle extends RecyclerView.Adapter<RecyclerViewCycle.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView fin;
+        private TextView nombre;
         private Button deletebtn;
         private Button editbtn;
-        private TextView inicio;
-        private TextView titulo;
+        private TextView apellido;
         ImageView image;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            inicio = (TextView)itemView.findViewById(R.id.txttecher_name);
+            nombre = (TextView)itemView.findViewById(R.id.txttecher_name);
             deletebtn = (Button)itemView.findViewById(R.id.btnteacher_delete) ;
             image=(ImageView)itemView.findViewById(R.id.imgTeacher_img);
             editbtn=(Button)itemView.findViewById(R.id.btnteacher_edit);
-            fin=(TextView) itemView.findViewById(R.id.txtteacher_apellido);
-            titulo=(TextView) itemView.findViewById(R.id.txtcycle_cicle);
+            apellido=(TextView) itemView.findViewById(R.id.txtteacher_apellido);
         }
     }
 
-    public RecyclerViewCycle(List<Cycle> menuList) {
+
+    public RecyclerViewTeacher(List<Teacher> menuList) {
         this.menuList = menuList;
     }
 
 
     @Override
-    public RecyclerViewCycle.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_cycle, parent, false);
-        RecyclerViewCycle.ViewHolder viewHolder = new RecyclerViewCycle.ViewHolder(view);
+    public RecyclerViewTeacher.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_teacher, parent, false);
+        RecyclerViewTeacher.ViewHolder viewHolder = new RecyclerViewTeacher.ViewHolder(view);
         view.setOnClickListener(this);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewCycle.ViewHolder holder, int position) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public void onBindViewHolder(RecyclerViewTeacher.ViewHolder holder, int position) {
 
 
 
-        holder.inicio.setText("Inicio: "+sdf.format(menuList.get(position).getFecha_inicio() ));
-        holder.fin.setText("Fin: "+ sdf.format(menuList.get(position).getFecha_fin()));
-        holder.image.setImageResource(R.drawable.date);
-        holder.titulo.setText(menuList.get(position).getNombre());
+
+        holder.nombre.setText(menuList.get(position).getNombre() );
+        holder.apellido.setText(menuList.get(position).getApellido());
+        holder.image.setImageResource(R.drawable.teacher2);
 
 
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
@@ -104,5 +102,4 @@ public class RecyclerViewCycle extends RecyclerView.Adapter<RecyclerViewCycle.Vi
     public int getItemCount() {
         return menuList.size();
     }
-
 }
